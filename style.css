@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -12,14 +13,23 @@
     --light-text: #ffffff;
     --text-light: #b3b3b3;
     --border-color: #404040;
+    --safe-area-inset-top: env(safe-area-inset-top, 0);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0);
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--light-text);
     background-color: var(--dark-bg);
     overflow-x: hidden;
+    font-size: 16px;
 }
 
 .container {
@@ -38,6 +48,7 @@ body {
     z-index: 100;
     box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
     border-bottom: 2px solid var(--primary-color);
+    padding-top: calc(1rem + var(--safe-area-inset-top));
 }
 
 .navbar .container {
@@ -53,11 +64,48 @@ body {
     text-transform: uppercase;
     color: var(--light-text);
     text-shadow: 0 0 10px var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .logo-icon {
     color: var(--primary-color);
-    margin-right: 0.5rem;
+}
+
+.logo-text {
+    display: none;
+}
+
+/* Menu Hambúrguer */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 101;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--light-text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
 }
 
 .nav-links {
@@ -71,6 +119,7 @@ body {
     text-decoration: none;
     transition: all 0.3s;
     position: relative;
+    font-weight: 500;
 }
 
 .nav-links a:hover {
@@ -97,9 +146,13 @@ body {
 .hero {
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--secondary-color) 100%);
     color: var(--light-text);
-    padding: 6rem 0;
+    padding: 4rem 0;
     position: relative;
     overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero::before {
@@ -123,6 +176,7 @@ body {
     margin-bottom: 1rem;
     animation: slideInDown 0.8s ease;
     letter-spacing: 1px;
+    line-height: 1.2;
 }
 
 .hero-content h1 .highlight {
@@ -150,12 +204,25 @@ body {
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: 1px;
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
 }
 
 .btn-primary {
     background-color: var(--primary-color);
     color: var(--light-text);
     box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.btn-primary:active {
+    background-color: #ff0a16;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
 }
 
 .btn-primary:hover {
@@ -175,10 +242,13 @@ body {
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
 }
 
+.btn-secondary:active {
+    background-color: #00c8dd;
+}
+
 .btn-whatsapp {
     background-color: #25d366;
     color: white;
-    width: 100%;
     margin-top: 1rem;
     box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
 }
@@ -186,6 +256,10 @@ body {
 .btn-whatsapp:hover {
     background-color: #1fa857;
     box-shadow: 0 0 20px rgba(37, 211, 102, 0.8);
+}
+
+.btn-whatsapp:active {
+    background-color: #1a8a47;
 }
 
 /* Cursos Section */
@@ -217,6 +291,8 @@ body {
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .curso-card::before {
@@ -241,6 +317,10 @@ body {
     opacity: 1;
 }
 
+.curso-card:active {
+    transform: translateY(-5px);
+}
+
 .curso-card.featured {
     border: 2px solid var(--primary-color);
     transform: scale(1.05);
@@ -254,13 +334,15 @@ body {
 .curso-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 1rem;
+    gap: 1rem;
 }
 
 .curso-header h3 {
     font-size: 1.5rem;
     color: var(--light-text);
+    flex: 1;
 }
 
 .badge {
@@ -272,6 +354,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+    white-space: nowrap;
 }
 
 .badge-popular {
@@ -290,12 +373,14 @@ body {
 .curso-features {
     list-style: none;
     margin-bottom: 1.5rem;
+    flex: 1;
 }
 
 .curso-features li {
     padding: 0.5rem 0;
     color: var(--text-light);
     border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
 }
 
 .curso-features li:last-child {
@@ -314,6 +399,8 @@ body {
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
     animation: fadeIn 0.3s;
+    overflow-y: auto;
+    padding-bottom: var(--safe-area-inset-bottom);
 }
 
 .modal.active {
@@ -332,6 +419,7 @@ body {
     position: relative;
     box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
     animation: slideIn 0.3s;
+    margin: auto;
 }
 
 .modal-close {
@@ -344,6 +432,11 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.3s;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover {
@@ -355,6 +448,7 @@ body {
     margin-bottom: 1.5rem;
     color: var(--light-text);
     text-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+    font-size: 1.5rem;
 }
 
 .course-summary {
@@ -368,6 +462,7 @@ body {
 .course-summary p {
     color: var(--text-light);
     margin: 0.5rem 0;
+    font-size: 0.95rem;
 }
 
 .pix-section {
@@ -376,6 +471,11 @@ body {
     background: var(--secondary-color);
     border-radius: 0.25rem;
     text-align: center;
+}
+
+.pix-section h3 {
+    margin-bottom: 1rem;
+    color: var(--light-text);
 }
 
 .qr-code-container {
@@ -387,11 +487,17 @@ body {
     border-radius: 0.25rem;
 }
 
+.qr-code-container img {
+    max-width: 100%;
+    height: auto;
+}
+
 .pix-key {
     margin: 1rem 0;
     font-size: 0.85rem;
     color: var(--text-light);
     word-break: break-all;
+    line-height: 1.4;
 }
 
 .whatsapp-section {
@@ -399,6 +505,11 @@ body {
     padding: 1.5rem;
     background: var(--secondary-color);
     border-radius: 0.25rem;
+}
+
+.whatsapp-section p {
+    margin-bottom: 1rem;
+    color: var(--text-light);
 }
 
 .garantia {
@@ -409,6 +520,7 @@ body {
     border-radius: 0.25rem;
     color: #25d366;
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 /* Chatbot */
@@ -429,11 +541,18 @@ body {
     transition: all 0.3s;
     text-transform: uppercase;
     letter-spacing: 1px;
+    min-height: 50px;
+    touch-action: manipulation;
+    bottom: calc(20px + var(--safe-area-inset-bottom));
 }
 
 .chatbot-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 0 30px rgba(229, 9, 20, 0.8);
+}
+
+.chatbot-toggle:active {
+    transform: scale(0.95);
 }
 
 .chatbot-container {
@@ -449,6 +568,7 @@ body {
     flex-direction: column;
     z-index: 99;
     border: 2px solid var(--primary-color);
+    bottom: calc(80px + var(--safe-area-inset-bottom));
 }
 
 .chatbot-container.active {
@@ -465,12 +585,22 @@ body {
     border-bottom: 2px solid var(--accent-color);
 }
 
+.chatbot-header h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
 .close-btn {
     background: none;
     border: none;
     color: var(--light-text);
     font-size: 1.5rem;
     cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .chatbot-messages {
@@ -487,6 +617,7 @@ body {
     border-radius: 0;
     max-width: 80%;
     word-wrap: break-word;
+    font-size: 0.95rem;
 }
 
 .message.user {
@@ -512,12 +643,13 @@ body {
 
 .chatbot-input input {
     flex: 1;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 0;
     font-size: 0.9rem;
     background: var(--secondary-color);
     color: var(--light-text);
+    min-height: 44px;
 }
 
 .chatbot-input input::placeholder {
@@ -525,7 +657,7 @@ body {
 }
 
 .chatbot-input button {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     background: var(--primary-color);
     color: var(--light-text);
     border: none;
@@ -533,11 +665,17 @@ body {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s;
+    min-height: 44px;
+    min-width: 44px;
 }
 
 .chatbot-input button:hover {
     background: #ff0a16;
     box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+}
+
+.chatbot-input button:active {
+    background: #cc0710;
 }
 
 /* Footer */
@@ -546,8 +684,19 @@ body {
     color: var(--text-light);
     text-align: center;
     padding: 2rem 0;
+    padding-bottom: calc(2rem + var(--safe-area-inset-bottom));
     margin-top: 4rem;
     border-top: 2px solid var(--primary-color);
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer a:hover {
+    text-shadow: 0 0 10px var(--accent-color);
 }
 
 /* Animações */
@@ -593,40 +742,6 @@ body {
     }
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .chatbot-container {
-        width: 90vw;
-        height: 70vh;
-        bottom: 70px;
-        right: 5vw;
-    }
-
-    .cursos-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .curso-card.featured {
-        transform: scale(1);
-    }
-
-    .curso-card.featured:hover {
-        transform: translateY(-10px);
-    }
-
-    .modal-content {
-        width: 95%;
-    }
-}
-
 /* Scroll bar customizado */
 ::-webkit-scrollbar {
     width: 8px;
@@ -643,4 +758,274 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #ff0a16;
+}
+
+/* ===== MEDIA QUERIES MOBILE ===== */
+
+@media (max-width: 768px) {
+    .logo-text {
+        display: inline;
+        font-size: 1.2rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--secondary-color);
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: 2px solid var(--primary-color);
+    }
+
+    .nav-links.active {
+        max-height: 300px;
+    }
+
+    .nav-links li {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 1rem;
+    }
+
+    .hero {
+        min-height: 50vh;
+        padding: 2rem 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .cursos h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .cursos-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .curso-card.featured {
+        transform: scale(1);
+    }
+
+    .curso-card.featured:hover {
+        transform: translateY(-10px);
+    }
+
+    .curso-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .curso-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .curso-price {
+        font-size: 1.8rem;
+    }
+
+    .curso-features li {
+        font-size: 0.9rem;
+        padding: 0.4rem 0;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+        padding: 0.7rem 1.2rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+
+    .pix-section {
+        padding: 1rem;
+    }
+
+    .qr-code-container {
+        padding: 0.75rem;
+    }
+
+    .qr-code-container img {
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    .pix-key {
+        font-size: 0.8rem;
+    }
+
+    .chatbot-container {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 150px);
+        max-height: 500px;
+        bottom: calc(70px + var(--safe-area-inset-bottom));
+        right: 20px;
+        left: auto;
+    }
+
+    .chatbot-toggle {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .message {
+        max-width: 85%;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+    }
+
+    .logo-text {
+        font-size: 1rem;
+    }
+
+    .hero {
+        min-height: 45vh;
+        padding: 1.5rem 0;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.65rem 1rem;
+    }
+
+    .cursos {
+        padding: 2rem 0;
+    }
+
+    .cursos h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .curso-card {
+        padding: 1.5rem;
+    }
+
+    .curso-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .curso-price {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .badge {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    .curso-features li {
+        font-size: 0.85rem;
+        padding: 0.3rem 0;
+    }
+
+    .modal-content {
+        width: 98%;
+        padding: 1.2rem;
+    }
+
+    .modal-close {
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .pix-key {
+        font-size: 0.75rem;
+    }
+
+    .qr-code-container img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .chatbot-container {
+        width: calc(100vw - 20px);
+        height: 60vh;
+        bottom: calc(60px + var(--safe-area-inset-bottom));
+        right: 10px;
+    }
+
+    .chatbot-toggle {
+        right: 10px;
+        bottom: calc(10px + var(--safe-area-inset-bottom));
+        padding: 0.65rem 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .footer {
+        padding: 1.5rem 0;
+        padding-bottom: calc(1.5rem + var(--safe-area-inset-bottom));
+    }
+}
+
+/* Orientação Landscape */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: 30vh;
+        padding: 1rem 0;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .chatbot-container {
+        height: 50vh;
+    }
+}
+
+/* Impressora */
+@media print {
+    .navbar,
+    .chatbot-toggle,
+    .chatbot-container,
+    .btn {
+        display: none !important;
+    }
 }

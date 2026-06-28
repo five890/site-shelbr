@@ -22,6 +22,41 @@ const courses = {
 let selectedCourse = null;
 let selectedPrice = null;
 
+// ===== MENU MOBILE =====
+function toggleMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+}
+
+function closeMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+}
+
+// Event listener para o menu hambúrguer
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+    }
+    
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', function(event) {
+        const navbar = document.querySelector('.navbar');
+        if (!navbar.contains(event.target)) {
+            closeMenu();
+        }
+    });
+});
+
+// ===== PAGAMENTO =====
+
 // Gerar QR Code Pix
 function generatePixQRCode() {
     const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(PIX_KEY)}`;
@@ -42,25 +77,39 @@ function selectCourse(courseId, price) {
     
     generatePixQRCode();
     openPaymentModal();
+    
+    // Fechar menu se estiver aberto
+    closeMenu();
 }
 
 // Abrir modal de pagamento
 function openPaymentModal() {
     const modal = document.getElementById('paymentModal');
     modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 // Fechar modal de pagamento
 function closePaymentModal() {
     const modal = document.getElementById('paymentModal');
     modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
 // Copiar chave Pix
 function copyPixKey() {
     navigator.clipboard.writeText(PIX_KEY).then(() => {
-        alert('Chave Pix copiada com sucesso!');
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copiado!';
+        btn.style.backgroundColor = '#25d366';
+        
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.backgroundColor = '';
+        }, 2000);
     }).catch(err => {
+        alert('Erro ao copiar. Tente novamente.');
         console.error('Erro ao copiar:', err);
     });
 }
@@ -79,7 +128,16 @@ window.addEventListener('click', function(event) {
     }
 });
 
-// Chatbot IA
+// Fechar modal ao pressionar ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closePaymentModal();
+        toggleChatbot();
+    }
+});
+
+// ===== CHATBOT IA =====
+
 const chatbotResponses = {
     'oi': 'Olá! 👋 Bem-vindo à Shelby Store. Como posso ajudá-lo?',
     'olá': 'Olá! 👋 Bem-vindo à Shelby Store. Como posso ajudá-lo?',
@@ -154,6 +212,7 @@ function sendChatMessage() {
 // Lidar com Enter no input
 function handleChatInput(event) {
     if (event.key === 'Enter') {
+        event.preventDefault();
         sendChatMessage();
     }
 }
@@ -169,7 +228,43 @@ function toggleChatbot() {
     }
 }
 
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
+// ===== INICIALIZAÇÃO =====
+
+document.addEventListener('DOMContentLoaded', function() {
     generatePixQRCode();
+    
+    // Detectar se é mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Otimizações específicas para mobile
+        document.body.classList.add('is-mobile');
+    }
+    
+    // Prevenir zoom duplo em inputs
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
 });
+
+// Detectar mudança de orientação
+window.addEventListener('orientationchange', function() {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 100);
+});
+
+// Otimizar performance em mobile
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+        // Carregar recursos não críticos
+        console.log('Shelby Store carregado com sucesso!');
+    });
+}
+
+// Service Worker para offline (opcional)
+if ('serviceWorker' in navigator) {
+    // Pode ser implementado para cache offline
+}

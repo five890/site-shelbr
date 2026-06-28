@@ -2,9 +2,22 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f0f0f">
+    <meta name="description" content="Shelby Store - Plataforma de vendas de cursos online com pagamento via Pix">
+    <meta name="keywords" content="cursos online, pix, educação digital, shelby store">
+    <meta name="author" content="Shelby Store">
+    <meta property="og:title" content="Shelby Store - Cursos Online">
+    <meta property="og:description" content="Aprenda com os melhores cursos online. Pagamento via Pix.">
+    <meta property="og:type" content="website">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Shelby Store">
+    
     <title>Shelby Store - Cursos Online</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23e50914'>▶</text></svg>">
+    
     <!-- Proteção contra inspeção -->
     <script src="security.js" defer></script>
 </head>
@@ -13,12 +26,20 @@
     <nav class="navbar">
         <div class="container">
             <div class="logo">
-                <span class="logo-icon">▶</span> Shelby Store
+                <span class="logo-icon">▶</span> <span class="logo-text">Shelby Store</span>
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#cursos">Cursos</a></li>
-                <li><a href="#contato">Contato</a></li>
+            
+            <!-- Menu Hambúrguer -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio" onclick="closeMenu()">Início</a></li>
+                <li><a href="#cursos" onclick="closeMenu()">Cursos</a></li>
+                <li><a href="#contato" onclick="closeMenu()">Contato</a></li>
             </ul>
         </div>
     </nav>
@@ -53,7 +74,7 @@
                         <li>✓ Acesso vitalício</li>
                         <li>✓ Suporte por chat</li>
                     </ul>
-                    <button class="btn btn-primary" onclick="selectCourse('basico', 7.00)">Quero Adquirir</button>
+                    <button class="btn btn-primary btn-block" onclick="selectCourse('basico', 7.00)">Quero Adquirir</button>
                 </div>
 
                 <!-- Curso Avançado -->
@@ -70,7 +91,7 @@
                         <li>✓ Comunidade exclusiva</li>
                         <li>✓ Suporte prioritário</li>
                     </ul>
-                    <button class="btn btn-primary" onclick="selectCourse('avancado', 15.00)">Quero Adquirir</button>
+                    <button class="btn btn-primary btn-block" onclick="selectCourse('avancado', 15.00)">Quero Adquirir</button>
                 </div>
 
                 <!-- Curso Ao Vivo -->
@@ -88,7 +109,7 @@
                         <li>✓ Suporte 24/7</li>
                         <li>✓ Certificado premium</li>
                     </ul>
-                    <button class="btn btn-primary" onclick="selectCourse('aovivo', 50.00)">Quero Adquirir</button>
+                    <button class="btn btn-primary btn-block" onclick="selectCourse('aovivo', 50.00)">Quero Adquirir</button>
                 </div>
             </div>
         </div>
@@ -110,16 +131,16 @@
                 <div class="pix-section">
                     <h3>Pague com Pix</h3>
                     <div class="qr-code-container">
-                        <img id="qrCode" src="" alt="QR Code Pix" style="width: 200px; height: 200px;">
+                        <img id="qrCode" src="" alt="QR Code Pix" style="width: 180px; height: 180px;" loading="lazy">
                     </div>
                     <p class="pix-key">Chave Pix: <strong>4cd768c3-b51e-4ec5-b64b-f9ed40be6561</strong></p>
-                    <button class="btn btn-secondary" onclick="copyPixKey()">📋 Copiar Chave Pix</button>
+                    <button class="btn btn-secondary btn-block" onclick="copyPixKey()">📋 Copiar Chave Pix</button>
                 </div>
 
                 <!-- WhatsApp Button -->
                 <div class="whatsapp-section">
                     <p>Após pagar, envie o comprovante:</p>
-                    <a href="https://wa.me/5515996945451?text=Olá,%20paguei%20pelo%20curso%20vou%20mandar%20o%20comprovante" target="_blank" class="btn btn-whatsapp">
+                    <a href="https://wa.me/5515996945451?text=Olá,%20paguei%20pelo%20curso%20vou%20mandar%20o%20comprovante" target="_blank" class="btn btn-whatsapp btn-block">
                         💬 Enviar Comprovante via WhatsApp
                     </a>
                 </div>
@@ -141,19 +162,20 @@
         <div class="chatbot-messages" id="chatbotMessages"></div>
         <div class="chatbot-input">
             <input type="text" id="userInput" placeholder="Digite sua dúvida..." onkeypress="handleChatInput(event)">
-            <button onclick="sendChatMessage()">Enviar</button>
+            <button onclick="sendChatMessage()" aria-label="Enviar mensagem">Enviar</button>
         </div>
     </div>
 
     <!-- Botão flutuante do Chatbot -->
-    <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+    <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()" aria-label="Abrir assistente">
         🤖 Fale Conosco
     </button>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contato">
         <div class="container">
             <p>&copy; 2024 Shelby Store. Todos os direitos reservados.</p>
+            <p>Entre em contato: <a href="https://wa.me/5515996945451" target="_blank">WhatsApp</a></p>
         </div>
     </footer>
 
