@@ -74,7 +74,8 @@ body {
 }
 
 .logo-text {
-    display: none;
+    display: inline;
+    font-size: 1.2rem;
 }
 
 .verified-badge {
@@ -804,11 +805,6 @@ body {
 /* ===== MEDIA QUERIES MOBILE ===== */
 
 @media (max-width: 768px) {
-    .logo-text {
-        display: inline;
-        font-size: 1.2rem;
-    }
-
     .verified-badge {
         width: 18px;
         height: 18px;
