@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelbr - Seu Curso Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Shelbr</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#pagamento">Pagamento</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforme Sua Vida com Nosso Curso</h1>
+                <p>Aprenda as melhores estratégias e alcance seus objetivos</p>
+                <button class="btn btn-primary" onclick="scrollToPayment()">Começar Agora</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2>Por que escolher nosso curso?</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>📚 Conteúdo Completo</h3>
+                    <p>Material estruturado e atualizado</p>
+                </div>
+                <div class="feature">
+                    <h3>🎓 Certificado</h3>
+                    <p>Certificado ao final do curso</p>
+                </div>
+                <div class="feature">
+                    <h3>💬 Suporte 24/7</h3>
+                    <p>Atendimento via IA e WhatsApp</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pagamento Section -->
+    <section id="pagamento" class="pagamento">
+        <div class="container">
+            <h2>Garanta Seu Acesso Agora</h2>
+            <div class="payment-container">
+                <div class="payment-box">
+                    <h3>Valor do Curso</h3>
+                    <p class="price">R$ 97,00</p>
+                    
+                    <!-- QR Code Pix -->
+                    <div class="pix-section">
+                        <h4>Pague com Pix</h4>
+                        <div id="qrCodeContainer" class="qr-code-container">
+                            <img id="qrCode" src="" alt="QR Code Pix" style="width: 250px; height: 250px;">
+                        </div>
+                        <p class="pix-key">Chave Pix: <strong>4cd768c3-b51e-4ec5-b64b-f9ed40be6561</strong></p>
+                        <button class="btn btn-secondary" onclick="copyPixKey()">Copiar Chave Pix</button>
+                    </div>
+
+                    <!-- WhatsApp Button -->
+                    <div class="whatsapp-section">
+                        <p>Após pagar, envie o comprovante:</p>
+                        <a href="https://wa.me/5515996945451?text=Olá,%20paguei%20pelo%20curso%20vou%20mandar%20o%20comprovante" target="_blank" class="btn btn-whatsapp">
+                            💬 Enviar Comprovante via WhatsApp
+                        </a>
+                    </div>
+
+                    <!-- Garantia -->
+                    <div class="garantia">
+                        <p>✅ Garantia de 7 dias ou seu dinheiro de volta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot IA -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h4>🤖 Assistente IA</h4>
+            <button class="close-btn" onclick="toggleChatbot()">−</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="userInput" placeholder="Digite sua dúvida..." onkeypress="handleChatInput(event)">
+            <button onclick="sendChatMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Botão flutuante do Chatbot -->
+    <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+        🤖 Fale Conosco
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Shelbr. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
