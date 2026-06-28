@@ -77,6 +77,47 @@ body {
     display: none;
 }
 
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #00e5ff 100%);
+    color: var(--dark-bg);
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 12px;
+    margin-left: 0.3rem;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+    animation: pulse 2s infinite;
+}
+
+.verified-badge-hero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, #00e5ff 100%);
+    color: var(--dark-bg);
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 0.5rem;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.6), 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.8), 0 0 30px rgba(0, 212, 255, 0.5);
+    }
+}
+
 /* Menu Hambúrguer */
 .menu-toggle {
     display: none;
@@ -766,6 +807,20 @@ body {
     .logo-text {
         display: inline;
         font-size: 1.2rem;
+    }
+
+    .verified-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        margin-left: 0.2rem;
+    }
+
+    .verified-badge-hero {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        margin-left: 0.3rem;
     }
 
     .menu-toggle {
