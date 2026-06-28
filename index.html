@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelbr - Seu Curso Online</title>
+    <title>Shelby Store - Cursos Online</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Proteção contra inspeção -->
+    <script src="security.js" defer></script>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Shelbr</div>
+            <div class="logo">
+                <span class="logo-icon">▶</span> Shelby Store
+            </div>
             <ul class="nav-links">
                 <li><a href="#inicio">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#pagamento">Pagamento</a></li>
+                <li><a href="#cursos">Cursos</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </div>
@@ -24,69 +27,110 @@
     <section id="inicio" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Transforme Sua Vida com Nosso Curso</h1>
-                <p>Aprenda as melhores estratégias e alcance seus objetivos</p>
-                <button class="btn btn-primary" onclick="scrollToPayment()">Começar Agora</button>
+                <h1>Bem-vindo à <span class="highlight">Shelby Store</span></h1>
+                <p>Aprenda as melhores estratégias com cursos de qualidade premium</p>
+                <button class="btn btn-primary" onclick="scrollToCourses()">Explorar Cursos</button>
             </div>
+            <div class="hero-decoration"></div>
         </div>
     </section>
 
-    <!-- Sobre Section -->
-    <section id="sobre" class="sobre">
+    <!-- Cursos Section -->
+    <section id="cursos" class="cursos">
         <div class="container">
-            <h2>Por que escolher nosso curso?</h2>
-            <div class="features">
-                <div class="feature">
-                    <h3>📚 Conteúdo Completo</h3>
-                    <p>Material estruturado e atualizado</p>
+            <h2>Escolha Seu Curso</h2>
+            <div class="cursos-grid">
+                <!-- Curso Básico -->
+                <div class="curso-card">
+                    <div class="curso-header">
+                        <h3>Curso Básico</h3>
+                        <span class="badge">Iniciante</span>
+                    </div>
+                    <div class="curso-price">R$ 7,00</div>
+                    <ul class="curso-features">
+                        <li>✓ 10 aulas em vídeo</li>
+                        <li>✓ Material de apoio</li>
+                        <li>✓ Acesso vitalício</li>
+                        <li>✓ Suporte por chat</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectCourse('basico', 7.00)">Quero Adquirir</button>
                 </div>
-                <div class="feature">
-                    <h3>🎓 Certificado</h3>
-                    <p>Certificado ao final do curso</p>
+
+                <!-- Curso Avançado -->
+                <div class="curso-card featured">
+                    <div class="curso-header">
+                        <h3>Curso Avançado</h3>
+                        <span class="badge badge-popular">Mais Popular</span>
+                    </div>
+                    <div class="curso-price">R$ 15,00</div>
+                    <ul class="curso-features">
+                        <li>✓ 30 aulas em vídeo</li>
+                        <li>✓ Projetos práticos</li>
+                        <li>✓ Certificado</li>
+                        <li>✓ Comunidade exclusiva</li>
+                        <li>✓ Suporte prioritário</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectCourse('avancado', 15.00)">Quero Adquirir</button>
                 </div>
-                <div class="feature">
-                    <h3>💬 Suporte 24/7</h3>
-                    <p>Atendimento via IA e WhatsApp</p>
+
+                <!-- Curso Ao Vivo -->
+                <div class="curso-card">
+                    <div class="curso-header">
+                        <h3>Curso Ao Vivo</h3>
+                        <span class="badge">Premium</span>
+                    </div>
+                    <div class="curso-price">R$ 50,00</div>
+                    <ul class="curso-features">
+                        <li>✓ Aulas ao vivo semanais</li>
+                        <li>✓ Passo a passo detalhado</li>
+                        <li>✓ Interação com instrutor</li>
+                        <li>✓ Gravações das aulas</li>
+                        <li>✓ Suporte 24/7</li>
+                        <li>✓ Certificado premium</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectCourse('aovivo', 50.00)">Quero Adquirir</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pagamento Section -->
-    <section id="pagamento" class="pagamento">
-        <div class="container">
-            <h2>Garanta Seu Acesso Agora</h2>
-            <div class="payment-container">
-                <div class="payment-box">
-                    <h3>Valor do Curso</h3>
-                    <p class="price">R$ 97,00</p>
-                    
-                    <!-- QR Code Pix -->
-                    <div class="pix-section">
-                        <h4>Pague com Pix</h4>
-                        <div id="qrCodeContainer" class="qr-code-container">
-                            <img id="qrCode" src="" alt="QR Code Pix" style="width: 250px; height: 250px;">
-                        </div>
-                        <p class="pix-key">Chave Pix: <strong>4cd768c3-b51e-4ec5-b64b-f9ed40be6561</strong></p>
-                        <button class="btn btn-secondary" onclick="copyPixKey()">Copiar Chave Pix</button>
-                    </div>
+    <!-- Modal de Pagamento -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePaymentModal()">✕</button>
+            
+            <h2>Finalize Sua Compra</h2>
+            <div class="modal-body">
+                <div class="course-summary">
+                    <p><strong>Curso Selecionado:</strong> <span id="courseName"></span></p>
+                    <p><strong>Valor:</strong> <span id="coursePrice"></span></p>
+                </div>
 
-                    <!-- WhatsApp Button -->
-                    <div class="whatsapp-section">
-                        <p>Após pagar, envie o comprovante:</p>
-                        <a href="https://wa.me/5515996945451?text=Olá,%20paguei%20pelo%20curso%20vou%20mandar%20o%20comprovante" target="_blank" class="btn btn-whatsapp">
-                            💬 Enviar Comprovante via WhatsApp
-                        </a>
+                <!-- QR Code Pix -->
+                <div class="pix-section">
+                    <h3>Pague com Pix</h3>
+                    <div class="qr-code-container">
+                        <img id="qrCode" src="" alt="QR Code Pix" style="width: 200px; height: 200px;">
                     </div>
+                    <p class="pix-key">Chave Pix: <strong>4cd768c3-b51e-4ec5-b64b-f9ed40be6561</strong></p>
+                    <button class="btn btn-secondary" onclick="copyPixKey()">📋 Copiar Chave Pix</button>
+                </div>
 
-                    <!-- Garantia -->
-                    <div class="garantia">
-                        <p>✅ Garantia de 7 dias ou seu dinheiro de volta</p>
-                    </div>
+                <!-- WhatsApp Button -->
+                <div class="whatsapp-section">
+                    <p>Após pagar, envie o comprovante:</p>
+                    <a href="https://wa.me/5515996945451?text=Olá,%20paguei%20pelo%20curso%20vou%20mandar%20o%20comprovante" target="_blank" class="btn btn-whatsapp">
+                        💬 Enviar Comprovante via WhatsApp
+                    </a>
+                </div>
+
+                <!-- Garantia -->
+                <div class="garantia">
+                    <p>✅ Garantia de 7 dias ou seu dinheiro de volta</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Chatbot IA -->
     <div class="chatbot-container" id="chatbotContainer">
@@ -109,7 +153,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Shelbr. Todos os direitos reservados.</p>
+            <p>&copy; 2024 Shelby Store. Todos os direitos reservados.</p>
         </div>
     </footer>
 

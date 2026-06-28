@@ -1,13 +1,24 @@
-# Shelbr - Site de Vendas de Curso com Pagamento Pix
+# Shelby Store - Plataforma de Vendas de Cursos Online
 
-Um site moderno e responsivo para vender cursos online com sistema de pagamento via Pix, chatbot IA atendente e integração com WhatsApp.
+Uma plataforma moderna e segura para vender cursos online com design estilo Netflix, sistema de pagamento via Pix, chatbot IA e proteção avançada contra hacking.
 
 ## 🚀 Funcionalidades
+
+✅ **Design Estilo Netflix**
+- Tema preto com LED branco (efeito neon)
+- Interface moderna e responsiva
+- Animações suaves e profissionais
+
+✅ **Três Opções de Curso**
+- Curso Básico - R$ 7,00 (10 aulas)
+- Curso Avançado - R$ 15,00 (30 aulas + certificado)
+- Curso Ao Vivo - R$ 50,00 (Aulas semanais ao vivo)
 
 ✅ **Sistema de Pagamento Pix**
 - QR Code dinâmico para pagamento
 - Chave Pix configurável
-- Cópia fácil da chave
+- Modal de pagamento elegante
+- Fluxo otimizado (só aparece ao clicar "Quero Adquirir")
 
 ✅ **Integração WhatsApp**
 - Botão flutuante para envio de comprovante
@@ -15,22 +26,26 @@ Um site moderno e responsivo para vender cursos online com sistema de pagamento 
 - Link direto para WhatsApp
 
 ✅ **Chatbot IA Atendente**
-- Respostas inteligentes sobre o curso
+- Respostas inteligentes sobre os cursos
 - Suporte 24/7
-- Interface amigável
+- Interface amigável com histórico
 
-✅ **Design Responsivo**
-- Otimizado para desktop, tablet e mobile
-- Animações suaves
-- Carregamento rápido
+✅ **Proteção de Segurança Avançada**
+- Bloqueio de inspeção de código (DevTools)
+- Proteção contra XSS e injeção de código
+- Desabilitar clique direito
+- Proteção contra cópia de código
+- Monitoramento de integridade do site
+- Bloqueio de requisições suspeitas
 
-## 📋 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 site-shelbr/
 ├── index.html          # Página principal
-├── style.css           # Estilos CSS
-├── script.js           # Funcionalidades JavaScript
+├── style.css           # Estilos (tema Netflix)
+├── script.js           # Funcionalidades (Pix, Chatbot, Cursos)
+├── security.js         # Proteção de segurança
 ├── package.json        # Configurações do projeto
 └── README.md           # Este arquivo
 ```
@@ -60,7 +75,6 @@ Abra o arquivo `script.js` e atualize as seguintes constantes:
 
 ```javascript
 const PIX_KEY = 'sua-chave-pix-aqui';
-const COURSE_PRICE = 'seu-valor-aqui';
 const WHATSAPP_NUMBER = 'seu-numero-whatsapp';
 ```
 
@@ -72,35 +86,50 @@ const WHATSAPP_NUMBER = 'seu-numero-whatsapp';
 3. Selecione a branch `main` e clique em Save
 4. Seu site estará disponível em `https://seu-usuario.github.io/site-shelbr`
 
-#### Opção B: Netlify (Gratuito)
+#### Opção B: Vercel (Recomendado - Automático)
+1. Acesse [vercel.com](https://vercel.com)
+2. Clique em "New Project"
+3. Conecte seu repositório GitHub
+4. Clique em Deploy
+5. **Pronto!** Qualquer mudança no GitHub atualiza automaticamente
+
+#### Opção C: Netlify (Gratuito)
 1. Acesse [netlify.com](https://netlify.com)
 2. Clique em "New site from Git"
 3. Conecte seu repositório GitHub
 4. Clique em Deploy
 
-#### Opção C: Vercel (Gratuito)
-1. Acesse [vercel.com](https://vercel.com)
-2. Clique em "New Project"
-3. Importe seu repositório GitHub
-4. Clique em Deploy
-
-#### Opção D: Hospedagem Tradicional
-1. Contrate uma hospedagem (ex: Hostinger, Bluehost)
-2. Faça upload dos arquivos via FTP
-3. Configure o domínio
-
 ## 📱 Personalização
 
-### Alterar Cores
+### Alterar Cores do Tema
 Edite o arquivo `style.css` e procure por `:root`:
 
 ```css
 :root {
-    --primary-color: #6366f1;      /* Cor principal */
-    --secondary-color: #ec4899;    /* Cor secundária */
-    --dark-bg: #0f172a;            /* Fundo escuro */
-    --light-bg: #f8fafc;           /* Fundo claro */
+    --primary-color: #e50914;      /* Vermelho Netflix */
+    --secondary-color: #221f1f;    /* Preto escuro */
+    --accent-color: #00d4ff;       /* Azul LED */
+    --dark-bg: #0f0f0f;            /* Fundo preto */
+    --light-text: #ffffff;         /* Texto branco */
 }
+```
+
+### Adicionar Mais Cursos
+Edite o arquivo `index.html` e adicione um novo `curso-card`:
+
+```html
+<div class="curso-card">
+    <div class="curso-header">
+        <h3>Novo Curso</h3>
+        <span class="badge">Novo</span>
+    </div>
+    <div class="curso-price">R$ XX,00</div>
+    <ul class="curso-features">
+        <li>✓ Recurso 1</li>
+        <li>✓ Recurso 2</li>
+    </ul>
+    <button class="btn btn-primary" onclick="selectCourse('id', XX.00)">Quero Adquirir</button>
+</div>
 ```
 
 ### Adicionar Mais Respostas ao Chatbot
@@ -113,15 +142,41 @@ const chatbotResponses = {
 };
 ```
 
-### Modificar Conteúdo
-Edite o arquivo `index.html` para alterar textos, títulos e descrições.
-
 ## 🔐 Segurança
 
-⚠️ **Importante:** 
-- Nunca compartilhe seu token do GitHub publicamente
-- Mantenha sua chave Pix segura
-- Use HTTPS em produção
+O site inclui proteção contra:
+- ✅ Inspeção de código (DevTools)
+- ✅ Clique direito
+- ✅ Atalhos de teclado (F12, Ctrl+Shift+I, etc)
+- ✅ Cópia de código
+- ✅ Injeção de código (XSS)
+- ✅ Modificação do DOM
+- ✅ Requisições suspeitas
+- ✅ Acesso a variáveis críticas
+
+**Importante:** Estas proteções são básicas. Para segurança máxima em produção, considere:
+- Usar HTTPS
+- Implementar CSP (Content Security Policy)
+- Usar um WAF (Web Application Firewall)
+- Fazer auditorias de segurança regulares
+
+## 📊 Fluxo de Vendas
+
+1. **Cliente acessa o site** → Vê os 3 cursos disponíveis
+2. **Cliente clica em "Quero Adquirir"** → Modal de pagamento abre
+3. **Cliente escaneia o QR Code Pix** → Realiza o pagamento
+4. **Cliente clica em "Enviar Comprovante via WhatsApp"** → Envia para você
+5. **Você confirma e libera o acesso** → Cliente recebe o curso
+
+## 🎯 Próximos Passos
+
+- [ ] Integrar com banco de dados para armazenar compras
+- [ ] Adicionar sistema de e-mail automático
+- [ ] Criar área de membros com acesso ao curso
+- [ ] Integrar com Stripe ou outras formas de pagamento
+- [ ] Adicionar analytics e rastreamento de conversão
+- [ ] Implementar sistema de cupons de desconto
+- [ ] Adicionar mais cursos dinamicamente
 
 ## 📞 Suporte
 
@@ -133,14 +188,8 @@ Para dúvidas ou problemas:
 
 Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
-## 🎯 Próximos Passos
-
-- [ ] Integrar com banco de dados para armazenar compras
-- [ ] Adicionar sistema de e-mail automático
-- [ ] Criar área de membros com acesso ao curso
-- [ ] Integrar com Stripe ou outras formas de pagamento
-- [ ] Adicionar analytics e rastreamento de conversão
-
 ---
 
-**Desenvolvido com ❤️ para Shelbr**
+**Desenvolvido com ❤️ para Shelby Store**
+
+**Última atualização:** Junho 2024
