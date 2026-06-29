@@ -211,3 +211,29 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+    <script>
+        // Desabilitar zoom via JavaScript
+        document.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, false);
+
+        // Desabilitar zoom duplo
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            let now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Desabilitar zoom via teclado
+        document.addEventListener('keydown', function(event) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        }, false);
+    </script>
