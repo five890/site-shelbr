@@ -95,40 +95,28 @@ function mostrarTelaComprovante(nome, email, curso, preco) {
     const modalContent = modal.querySelector('.modal-content');
     
     const mensagem = `
-        <div style="text-align: center; padding: 30px;">
-            <div style="font-size: 48px; margin-bottom: 20px;">💳</div>
-            <h2 style="color: #e50914; margin-bottom: 10px;">Envie o Comprovante</h2>
-            <p style="color: #6b7280; margin-bottom: 10px;">
-                Pagamento de <strong>R$ ${preco.toFixed(2)}</strong> do ${curso.titulo}
+        <div style="text-align: center; padding: 50px 30px;">
+            <h2 style="color: #e50914; margin-bottom: 30px; font-size: 28px; font-weight: 700;">Envie o Comprovante</h2>
+            <p style="color: #9ca3af; margin-bottom: 40px; font-size: 16px;">
+                Clique no botao abaixo para ir direto ao WhatsApp e enviar o comprovante
             </p>
-            <p style="color: #9ca3af; margin-bottom: 30px; font-size: 14px;">
-                Clique no botão verde abaixo para enviar o comprovante via WhatsApp
-            </p>
-            <button onclick="enviarComprovanteWhatsApp('${nome}', '${email}', '${curso.titulo}', '${preco}')" style="
+            <a href="https://wa.me/15996945451?text=Ola! Paguei pelo ${curso.titulo} (R$ ${preco.toFixed(2)}). Estou enviando o comprovante agora." target="_blank" style="
+                display: inline-block;
                 background: #25d366;
                 color: white;
                 border: none;
-                padding: 16px 40px;
+                padding: 18px 50px;
                 border-radius: 8px;
                 cursor: pointer;
                 font-weight: 600;
-                font-size: 16px;
-                margin-bottom: 15px;
-                width: 100%;
+                font-size: 18px;
+                text-decoration: none;
                 transition: all 0.3s ease;
-            " onmouseover="this.style.background='#20ba58'" onmouseout="this.style.background='#25d366'">
-                📱 Enviar Comprovante via WhatsApp
-            </button>
-            <button onclick="fecharCheckout()" style="
-                background: #6366f1;
-                color: white;
-                border: none;
-                padding: 12px 30px;
-                border-radius: 8px;
-                cursor: pointer;
-                font-weight: 600;
                 width: 100%;
-            ">Fechar</button>
+                box-sizing: border-box;
+            " onmouseover="this.style.background='#20ba58'" onmouseout="this.style.background='#25d366'">
+                📱 Ir para WhatsApp
+            </a>
         </div>
     `;
     
