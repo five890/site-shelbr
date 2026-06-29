@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelby Store - Cursos Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🎓</span>
+                <h1>Shelby Store</h1>
+            </div>
+            <nav class="nav">
+                <a href="#cursos">Cursos</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">Aprenda com os Melhores Cursos</h2>
+            <p class="hero-subtitle">Transforme seu conhecimento em resultados reais</p>
+            <div class="hero-animation">
+                <div class="floating-card card-1">📚</div>
+                <div class="floating-card card-2">💡</div>
+                <div class="floating-card card-3">🚀</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos Section -->
+    <section id="cursos" class="cursos">
+        <div class="container">
+            <h2 class="section-title">Escolha Seu Plano</h2>
+            <p class="section-subtitle">Três opções para atender suas necessidades</p>
+
+            <div class="cursos-grid">
+                <!-- Curso Gratuito -->
+                <div class="curso-card curso-gratuito" data-aos="fade-up">
+                    <div class="curso-badge">Iniciante</div>
+                    <h3 class="curso-titulo">Curso Gratuito</h3>
+                    <p class="curso-descricao">Aprenda o básico sem investimento</p>
+                    
+                    <div class="curso-preco">
+                        <span class="preco">Grátis</span>
+                    </div>
+
+                    <ul class="curso-features">
+                        <li>✓ 5 aulas introdutórias</li>
+                        <li>✓ Acesso vitalício</li>
+                        <li>✓ Certificado básico</li>
+                        <li>✗ Suporte via email</li>
+                        <li>✗ Aulas ao vivo</li>
+                    </ul>
+
+                    <button class="btn btn-primary" onclick="abrirCheckout('gratuito', 0)">
+                        Acessar Agora
+                    </button>
+                </div>
+
+                <!-- Curso Completo -->
+                <div class="curso-card curso-completo destaque" data-aos="fade-up">
+                    <div class="curso-badge badge-destaque">Mais Popular</div>
+                    <h3 class="curso-titulo">Curso Completo</h3>
+                    <p class="curso-descricao">Conteúdo completo com suporte</p>
+                    
+                    <div class="curso-preco">
+                        <span class="preco-valor">R$ 29,90</span>
+                        <span class="preco-original">R$ 49,90</span>
+                    </div>
+
+                    <ul class="curso-features">
+                        <li>✓ 25 aulas completas</li>
+                        <li>✓ Acesso vitalício</li>
+                        <li>✓ Certificado profissional</li>
+                        <li>✓ Suporte via email</li>
+                        <li>✓ Materiais em PDF</li>
+                    </ul>
+
+                    <button class="btn btn-destaque" onclick="abrirCheckout('completo', 29.90)">
+                        Comprar Agora
+                    </button>
+                </div>
+
+                <!-- Curso Ao Vivo -->
+                <div class="curso-card curso-aovivo" data-aos="fade-up">
+                    <div class="curso-badge">Premium</div>
+                    <h3 class="curso-titulo">Curso Ao Vivo</h3>
+                    <p class="curso-descricao">Aulas ao vivo com interação direta</p>
+                    
+                    <div class="curso-preco">
+                        <span class="preco-valor">R$ 10,00</span>
+                        <span class="preco-periodo">/mês</span>
+                    </div>
+
+                    <ul class="curso-features">
+                        <li>✓ Aulas ao vivo semanais</li>
+                        <li>✓ Acesso ao grupo privado</li>
+                        <li>✓ Suporte prioritário</li>
+                        <li>✓ Mentorias individuais</li>
+                        <li>✓ Comunidade exclusiva</li>
+                    </ul>
+
+                    <button class="btn btn-primary" onclick="abrirCheckout('aovivo', 10)">
+                        Começar Agora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2 class="section-title">Por que escolher nossos cursos?</h2>
+            <div class="sobre-grid">
+                <div class="sobre-card">
+                    <div class="sobre-icon">📖</div>
+                    <h3>Conteúdo Atualizado</h3>
+                    <p>Sempre com as melhores práticas do mercado</p>
+                </div>
+                <div class="sobre-card">
+                    <div class="sobre-icon">👨‍🏫</div>
+                    <h3>Instrutores Experientes</h3>
+                    <p>Profissionais com anos de experiência</p>
+                </div>
+                <div class="sobre-card">
+                    <div class="sobre-icon">🎯</div>
+                    <h3>Resultados Garantidos</h3>
+                    <p>Aprenda na prática com projetos reais</p>
+                </div>
+                <div class="sobre-card">
+                    <div class="sobre-icon">⏰</div>
+                    <h3>Seu Próprio Ritmo</h3>
+                    <p>Estude quando e onde quiser</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2 class="section-title">Dúvidas?</h2>
+            <p class="section-subtitle">Entre em contato conosco</p>
+            <div class="contato-buttons">
+                <a href="https://wa.me/15996945451?text=Olá%2C%20tenho%20dúvidas%20sobre%20os%20cursos" class="btn btn-whatsapp" target="_blank">
+                    💬 WhatsApp
+                </a>
+                <a href="mailto:contato@shelbystore.com" class="btn btn-email">
+                    📧 Email
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Checkout -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="fecharCheckout()">&times;</button>
+            
+            <h2 id="modalTitulo">Finalize sua Compra</h2>
+            
+            <div class="checkout-info">
+                <p id="checkoutDescricao"></p>
+                <p class="preco-total">Total: <span id="precoTotal">R$ 0,00</span></p>
+            </div>
+
+            <form id="checkoutForm" onsubmit="processarPagamento(event)">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" required placeholder="Seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required placeholder="seu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Telefone</label>
+                    <input type="tel" required placeholder="(15) 99694-5451">
+                </div>
+
+                <div class="pix-info">
+                    <h3>Dados para Pagamento PIX</h3>
+                    <div class="pix-key">
+                        <p>Chave PIX:</p>
+                        <code id="pixKey">4cd768c3-b51e-4ec5-b64b-f9ed40be6561</code>
+                        <button type="button" class="btn-copy" onclick="copiarPix()">Copiar</button>
+                    </div>
+                    <p class="pix-instrucoes">Após realizar o pagamento, envie o comprovante via WhatsApp</p>
+                </div>
+
+                <button type="submit" class="btn btn-destaque btn-block">
+                    Confirmar Compra
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Shelby Store. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
