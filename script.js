@@ -16,14 +16,20 @@ const cursos = {
 function abrirCheckout(tipo, preco) {
     const modal = document.getElementById('checkoutModal');
     const curso = cursos[tipo];
+    const pixSection = document.getElementById('pixSection');
+    const btnPagamento = document.getElementById('btnPagamento');
     
     document.getElementById('modalTitulo').textContent = `Finalize sua Compra - ${curso.titulo}`;
     document.getElementById('checkoutDescricao').textContent = curso.descricao;
     
     if (preco === 0) {
         document.getElementById('precoTotal').textContent = 'Grátis';
+        pixSection.style.display = 'none';
+        btnPagamento.textContent = 'Adquirir Gratis';
     } else {
         document.getElementById('precoTotal').textContent = `R$ ${preco.toFixed(2)}`;
+        pixSection.style.display = 'block';
+        btnPagamento.textContent = 'Já Paguei';
     }
     
     document.getElementById('checkoutForm').dataset.cursoTipo = tipo;

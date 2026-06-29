@@ -162,7 +162,7 @@
                     <input type="email" required placeholder="seu@email.com">
                 </div>
 
-                <div class="pix-info">
+                <div class="pix-info" id="pixSection" style="display: block;">
                     <h3>Dados para Pagamento PIX</h3>
                     <div class="pix-key">
                         <p>Chave PIX:</p>
@@ -172,7 +172,7 @@
                     <p class="pix-instrucoes">Após realizar o pagamento, clique em "Já Paguei"</p>
                 </div>
 
-                <button type="button" class="btn btn-destaque btn-block" onclick="processarPagamento(event)">
+                <button type="button" class="btn btn-destaque btn-block" id="btnPagamento" onclick="processarPagamento(event)">
                     Já Paguei
                 </button>
             </form>
