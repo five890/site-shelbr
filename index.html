@@ -213,6 +213,25 @@
         </div>
     </footer>
 
+    <!-- Chat Atendente -->
+    <button id="chatToggle" class="chat-toggle" onclick="abrirChat()">💬</button>
+    
+    <div id="chatContainer" class="chat-container" style="display: none;">
+        <div class="chat-header">
+            <span>Atendente Shelby Store</span>
+            <button class="chat-close" onclick="fecharChat()">✕</button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="chat-message bot">
+                Olá! Bem-vindo à Shelby Store! Como posso ajudá-lo?
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Digite sua dúvida...">
+            <button class="chat-send" onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

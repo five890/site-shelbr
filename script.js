@@ -181,3 +181,97 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+// Chat Atendente
+const respostasBot = {
+    'oi': 'Olá! Bem-vindo à Shelby Store! Como posso ajudá-lo?',
+    'olá': 'Olá! Bem-vindo à Shelby Store! Como posso ajudá-lo?',
+    'curso gratuito': 'O Curso Gratuito é perfeito para iniciantes! Você terá acesso a 5 aulas introdutórias e um certificado básico. Totalmente grátis!',
+    'curso completo': 'O Curso Completo é o mais popular! Por apenas R$ 29,90, você ganha 25 aulas completas, acesso vitalício, certificado profissional e suporte via email.',
+    'curso ao vivo': 'O Curso Ao Vivo é premium! Por R$ 10/mês, você participa de aulas ao vivo semanais, acesso ao grupo privado, suporte prioritário e mentorias individuais.',
+    'preço': 'Temos 3 opções: Gratuito (R$ 0), Curso Completo (R$ 29,90) e Curso Ao Vivo (R$ 10/mês). Qual te interessa?',
+    'pagamento': 'Aceitamos pagamento via Pix! Após clicar em Comprar, você receberá a chave Pix para transferir. Simples e rápido!',
+    'pix': 'Sim! Usamos Pix para pagamentos. É seguro, rápido e sem taxas!',
+    'suporte': 'Oferecemos suporte via email para o Curso Completo e suporte prioritário para o Curso Ao Vivo. Como posso ajudar?',
+    'certificado': 'Sim! Todos os cursos incluem certificado. O Curso Gratuito oferece certificado básico e o Curso Completo oferece certificado profissional.',
+    'acesso': 'O acesso é vitalício! Você pode estudar no seu próprio ritmo, quando quiser.',
+    'dúvida': 'Claro! Qual é sua dúvida? Estou aqui para ajudar!',
+    'obrigado': 'De nada! Se tiver mais dúvidas, é só chamar!',
+    'valeu': 'De nada! Fico feliz em ajudar!'
+};
+
+let chatAberto = false;
+
+function abrirChat() {
+    const chatContainer = document.getElementById('chatContainer');
+    const chatToggle = document.getElementById('chatToggle');
+    
+    if (chatAberto) {
+        chatContainer.style.display = 'none';
+        chatToggle.style.display = 'flex';
+        chatAberto = false;
+    } else {
+        chatContainer.style.display = 'flex';
+        chatToggle.style.display = 'none';
+        chatAberto = true;
+        document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    }
+}
+
+function fecharChat() {
+    const chatContainer = document.getElementById('chatContainer');
+    const chatToggle = document.getElementById('chatToggle');
+    chatContainer.style.display = 'none';
+    chatToggle.style.display = 'flex';
+    chatAberto = false;
+}
+
+function enviarMensagem() {
+    const input = document.getElementById('chatInput');
+    const mensagem = input.value.trim();
+    
+    if (!mensagem) return;
+    
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Adicionar mensagem do usuário
+    const userDiv = document.createElement('div');
+    userDiv.className = 'chat-message user';
+    userDiv.textContent = mensagem;
+    chatMessages.appendChild(userDiv);
+    
+    input.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Simular resposta do bot
+    setTimeout(() => {
+        const mensagemLower = mensagem.toLowerCase();
+        let resposta = 'Desculpe, não entendi sua pergunta. Pode reformular?';
+        
+        for (const [chave, valor] of Object.entries(respostasBot)) {
+            if (mensagemLower.includes(chave)) {
+                resposta = valor;
+                break;
+            }
+        }
+        
+        const botDiv = document.createElement('div');
+        botDiv.className = 'chat-message bot';
+        botDiv.textContent = resposta;
+        chatMessages.appendChild(botDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 500);
+}
+
+// Permitir enviar com Enter
+document.addEventListener('DOMContentLoaded', function() {
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                enviarMensagem();
+            }
+        });
+    }
+});
