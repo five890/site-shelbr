@@ -80,12 +80,7 @@ function processarPagamento(e) {
     
     const precoNum = parseFloat(preco);
     
-    if (precoNum === 0) {
-        mostrarSucesso(nome, email, curso, 0);
-        return;
-    }
-    
-    // Mostrar tela de envio de comprovante
+    // Mostrar tela de envio de comprovante para todos os cursos
     mostrarTelaComprovante(nome, email, curso, precoNum);
 }
 
