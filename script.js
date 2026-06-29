@@ -78,13 +78,15 @@ function processarPagamento(e) {
         return;
     }
     
-    if (preco === 0 || preco === '0') {
+    const precoNum = parseFloat(preco);
+    
+    if (precoNum === 0) {
         mostrarSucesso(nome, email, curso, 0);
         return;
     }
     
     // Mostrar tela de envio de comprovante
-    mostrarTelaComprovante(nome, email, curso, preco);
+    mostrarTelaComprovante(nome, email, curso, precoNum);
 }
 
 // Mostrar tela de envio de comprovante
@@ -102,7 +104,7 @@ function mostrarTelaComprovante(nome, email, curso, preco) {
             <p style="color: #9ca3af; margin-bottom: 30px; font-size: 14px;">
                 Clique no botão verde abaixo para enviar o comprovante via WhatsApp
             </p>
-            <button onclick="enviarComprovanteWhatsApp('${nome}', '${email}', '${curso.titulo}', ${preco})" style="
+            <button onclick="enviarComprovanteWhatsApp('${nome}', '${email}', '${curso.titulo}', '${preco}')" style="
                 background: #25d366;
                 color: white;
                 border: none;
