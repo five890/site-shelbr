@@ -83,13 +83,63 @@ function processarPagamento(e) {
         return;
     }
     
-    const mensagem = `Olá! Realizei o pagamento do ${curso.titulo} (R$ ${preco.toFixed(2)}).\n\nDados:\nNome: ${nome}\nEmail: ${email}\n\nAguardo a confirmação!`;
+    // Mostrar tela de envio de comprovante
+    mostrarTelaComprovante(nome, email, curso, preco);
+}
+
+// Mostrar tela de envio de comprovante
+function mostrarTelaComprovante(nome, email, curso, preco) {
+    const modal = document.getElementById('checkoutModal');
+    const modalContent = modal.querySelector('.modal-content');
+    
+    const mensagem = `
+        <div style="text-align: center; padding: 30px;">
+            <div style="font-size: 48px; margin-bottom: 20px;">💳</div>
+            <h2 style="color: #e50914; margin-bottom: 10px;">Envie o Comprovante</h2>
+            <p style="color: #6b7280; margin-bottom: 10px;">
+                Pagamento de <strong>R$ ${preco.toFixed(2)}</strong> do ${curso.titulo}
+            </p>
+            <p style="color: #9ca3af; margin-bottom: 30px; font-size: 14px;">
+                Clique no botão verde abaixo para enviar o comprovante via WhatsApp
+            </p>
+            <button onclick="enviarComprovanteWhatsApp('${nome}', '${email}', '${curso.titulo}', ${preco})" style="
+                background: #25d366;
+                color: white;
+                border: none;
+                padding: 16px 40px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 16px;
+                margin-bottom: 15px;
+                width: 100%;
+                transition: all 0.3s ease;
+            " onmouseover="this.style.background='#20ba58'" onmouseout="this.style.background='#25d366'">
+                📱 Enviar Comprovante via WhatsApp
+            </button>
+            <button onclick="fecharCheckout()" style="
+                background: #6366f1;
+                color: white;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                width: 100%;
+            ">Fechar</button>
+        </div>
+    `;
+    
+    modalContent.innerHTML = mensagem;
+}
+
+// Enviar comprovante via WhatsApp
+function enviarComprovanteWhatsApp(nome, email, cursoTitulo, preco) {
+    const mensagem = `Olá! Realizei o pagamento do ${cursoTitulo} (R$ ${preco.toFixed(2)}).\n\nDados:\nNome: ${nome}\nEmail: ${email}\n\nEstou enviando o comprovante em anexo. Aguardo a confirmação!`;
     const urlWhatsApp = `https://wa.me/15996945451?text=${encodeURIComponent(mensagem)}`;
     
-    // Ir direto para WhatsApp
     window.open(urlWhatsApp, '_blank');
     
-    // Fechar modal após um tempo
     setTimeout(() => {
         fecharCheckout();
     }, 1000);
@@ -183,14 +233,12 @@ document.addEventListener('DOMContentLoaded', function() {
 const respostasBot = {
     'oi': 'Olá! Bem-vindo à Shelby Store! Como posso ajudá-lo?',
     'olá': 'Olá! Bem-vindo à Shelby Store! Como posso ajudá-lo?',
-    'curso gratuito': 'O Curso Gratuito é perfeito para iniciantes! Você terá acesso a 5 aulas introdutórias e um certificado básico. Totalmente grátis!',
-    'curso completo': 'O Curso Completo é o mais popular! Por apenas R$ 29,90, você ganha 25 aulas completas, acesso vitalício, certificado profissional e suporte via email.',
-    'curso ao vivo': 'O Curso Ao Vivo é premium! Por R$ 10/mês, você participa de aulas ao vivo semanais, acesso ao grupo privado, suporte prioritário e mentorias individuais.',
-    'preço': 'Temos 3 opções: Gratuito (R$ 0), Curso Completo (R$ 29,90) e Curso Ao Vivo (R$ 10/mês). Qual te interessa?',
-    'pagamento': 'Aceitamos pagamento via Pix! Após clicar em Comprar, você receberá a chave Pix para transferir. Simples e rápido!',
+    'curso gratuito': 'O Curso Gratuito é perfeito para iniciantes! Você terá acesso a vídeo grátis de como criar sua loja e produtos que vender!',
+    'loja entregue': 'A Loja Entregue é o mais popular! Por apenas R$ 10/mês, você ganha aulas ao vivo semanais, sua loja entregue em menos de 24h, recursos VIP e atendimento prioritário!',
+    'preço': 'Temos 2 opções: Curso Gratuito (R$ 0) e Loja Entregue (R$ 10/mês). Qual te interessa?',
+    'pagamento': 'Aceitamos pagamento via Pix! Após clicar em Já Paguei, você receberá a chave Pix para transferir. Simples e rápido!',
     'pix': 'Sim! Usamos Pix para pagamentos. É seguro, rápido e sem taxas!',
-    'suporte': 'Oferecemos suporte via email para o Curso Completo e suporte prioritário para o Curso Ao Vivo. Como posso ajudar?',
-    'certificado': 'Sim! Todos os cursos incluem certificado. O Curso Gratuito oferece certificado básico e o Curso Completo oferece certificado profissional.',
+    'suporte': 'Oferecemos suporte prioritário para o Loja Entregue. Como posso ajudar?',
     'acesso': 'O acesso é vitalício! Você pode estudar no seu próprio ritmo, quando quiser.',
     'dúvida': 'Claro! Qual é sua dúvida? Estou aqui para ajudar!',
     'obrigado': 'De nada! Se tiver mais dúvidas, é só chamar!',
