@@ -46,18 +46,18 @@
                 <div class="curso-card curso-gratuito" data-aos="fade-up">
                     <div class="curso-badge">Iniciante</div>
                     <h3 class="curso-titulo">Curso Gratuito</h3>
-                    <p class="curso-descricao">Aprenda o básico sem investimento</p>
+                    <p class="curso-descricao">Aprenda como criar sua loja</p>
                     
                     <div class="curso-preco">
                         <span class="preco">Grátis</span>
                     </div>
 
                     <ul class="curso-features">
-                        <li>✓ 5 aulas introdutórias</li>
+                        <li>✓ Vídeo gratuito completo</li>
+                        <li>✓ Como criar sua loja</li>
+                        <li>✓ Produtos que vender</li>
+                        <li>✓ Estratégias de venda</li>
                         <li>✓ Acesso vitalício</li>
-                        <li>✓ Certificado básico</li>
-                        <li>✗ Suporte via email</li>
-                        <li>✗ Aulas ao vivo</li>
                     </ul>
 
                     <button class="btn btn-primary" onclick="abrirCheckout('gratuito', 0)">
@@ -65,35 +65,13 @@
                     </button>
                 </div>
 
-                <!-- Curso Completo -->
-                <div class="curso-card curso-completo destaque" data-aos="fade-up">
-                    <div class="curso-badge badge-destaque">Mais Popular</div>
-                    <h3 class="curso-titulo">Curso Completo</h3>
-                    <p class="curso-descricao">Conteúdo completo com suporte</p>
-                    
-                    <div class="curso-preco">
-                        <span class="preco-valor">R$ 29,90</span>
-                        <span class="preco-original">R$ 49,90</span>
-                    </div>
 
-                    <ul class="curso-features">
-                        <li>✓ 25 aulas completas</li>
-                        <li>✓ Acesso vitalício</li>
-                        <li>✓ Certificado profissional</li>
-                        <li>✓ Suporte via email</li>
-                        <li>✓ Materiais em PDF</li>
-                    </ul>
-
-                    <button class="btn btn-destaque" onclick="abrirCheckout('completo', 29.90)">
-                        Comprar Agora
-                    </button>
-                </div>
 
                 <!-- Curso Ao Vivo -->
-                <div class="curso-card curso-aovivo" data-aos="fade-up">
-                    <div class="curso-badge">Premium</div>
-                    <h3 class="curso-titulo">Curso Ao Vivo</h3>
-                    <p class="curso-descricao">Aulas ao vivo com interação direta</p>
+                <div class="curso-card curso-aovivo destaque" data-aos="fade-up">
+                    <div class="curso-badge badge-destaque">Mais Popular</div>
+                    <h3 class="curso-titulo">Loja Entregue</h3>
+                    <p class="curso-descricao">Sua loja pronta em menos de 24h</p>
                     
                     <div class="curso-preco">
                         <span class="preco-valor">R$ 10,00</span>
@@ -102,13 +80,13 @@
 
                     <ul class="curso-features">
                         <li>✓ Aulas ao vivo semanais</li>
-                        <li>✓ Acesso ao grupo privado</li>
-                        <li>✓ Suporte prioritário</li>
-                        <li>✓ Mentorias individuais</li>
+                        <li>✓ Sua loja entregue em <24h</li>
+                        <li>✓ Recursos VIP inclusos</li>
+                        <li>✓ Atendimento prioritário</li>
                         <li>✓ Comunidade exclusiva</li>
                     </ul>
 
-                    <button class="btn btn-primary" onclick="abrirCheckout('aovivo', 10)">
+                    <button class="btn btn-destaque" onclick="abrirCheckout('aovivo', 10)">
                         Começar Agora
                     </button>
                 </div>
@@ -184,11 +162,6 @@
                     <input type="email" required placeholder="seu@email.com">
                 </div>
 
-                <div class="form-group">
-                    <label>Telefone</label>
-                    <input type="tel" required placeholder="(15) 99694-5451">
-                </div>
-
                 <div class="pix-info">
                     <h3>Dados para Pagamento PIX</h3>
                     <div class="pix-key">
@@ -196,11 +169,11 @@
                         <code id="pixKey">4cd768c3-b51e-4ec5-b64b-f9ed40be6561</code>
                         <button type="button" class="btn-copy" onclick="copiarPix()">Copiar</button>
                     </div>
-                    <p class="pix-instrucoes">Após realizar o pagamento, envie o comprovante via WhatsApp</p>
+                    <p class="pix-instrucoes">Após realizar o pagamento, clique em "Já Paguei"</p>
                 </div>
 
                 <button type="submit" class="btn btn-destaque btn-block">
-                    Confirmar Compra
+                    Já Paguei
                 </button>
             </form>
         </div>

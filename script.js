@@ -3,17 +3,12 @@ const cursos = {
     gratuito: {
         titulo: 'Curso Gratuito',
         preco: 0,
-        descricao: 'Aprenda o básico sem investimento'
-    },
-    completo: {
-        titulo: 'Curso Completo',
-        preco: 29.90,
-        descricao: 'Conteúdo completo com suporte'
+        descricao: 'Vídeo gratis de como criar sua loja'
     },
     aovivo: {
-        titulo: 'Curso Ao Vivo',
+        titulo: 'Loja Entregue',
         preco: 10,
-        descricao: 'Aulas ao vivo com interação direta'
+        descricao: 'Sua loja pronta em menos de 24h com recursos VIP'
     }
 };
 
@@ -74,33 +69,34 @@ function processarPagamento(e) {
     const form = document.getElementById('checkoutForm');
     const nome = form.querySelector('input[type="text"]').value;
     const email = form.querySelector('input[type="email"]').value;
-    const telefone = form.querySelector('input[type="tel"]').value;
     const cursoTipo = form.dataset.cursoTipo;
     const preco = form.dataset.preco;
     const curso = cursos[cursoTipo];
     
-    if (!nome || !email || !telefone) {
+    if (!nome || !email) {
         alert('Por favor, preencha todos os campos!');
         return;
     }
     
     if (preco === 0 || preco === '0') {
-        mostrarSucesso(nome, email, telefone, curso, 0);
+        mostrarSucesso(nome, email, curso, 0);
         return;
     }
     
-    const mensagem = `Olá! Realizei o pagamento do ${curso.titulo} (R$ ${preco.toFixed(2)}).\n\nDados:\nNome: ${nome}\nEmail: ${email}\nTelefone: ${telefone}\n\nAguardo a confirmação!`;
+    const mensagem = `Olá! Realizei o pagamento do ${curso.titulo} (R$ ${preco.toFixed(2)}).\n\nDados:\nNome: ${nome}\nEmail: ${email}\n\nAguardo a confirmação!`;
     const urlWhatsApp = `https://wa.me/15996945451?text=${encodeURIComponent(mensagem)}`;
     
-    mostrarSucesso(nome, email, telefone, curso, preco);
+    // Ir direto para WhatsApp
+    window.open(urlWhatsApp, '_blank');
     
+    // Fechar modal após um tempo
     setTimeout(() => {
-        window.open(urlWhatsApp, '_blank');
-    }, 2000);
+        fecharCheckout();
+    }, 1000);
 }
 
 // Mostrar mensagem de sucesso
-function mostrarSucesso(nome, email, telefone, curso, preco) {
+function mostrarSucesso(nome, email, curso, preco) {
     const modal = document.getElementById('checkoutModal');
     const modalContent = modal.querySelector('.modal-content');
     
@@ -125,7 +121,7 @@ function mostrarSucesso(nome, email, telefone, curso, preco) {
     } else {
         mensagem += `
             <p style="color: #6b7280; margin-bottom: 20px;">
-                Você será redirecionado para o WhatsApp para enviar o comprovante.
+                Você será redirecionado para o WhatsApp para confirmar o pagamento.
             </p>
             <p style="color: #6b7280; margin-bottom: 20px;">
                 Valor: R$ ${preco.toFixed(2)}
