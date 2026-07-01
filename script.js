@@ -7,7 +7,7 @@ const cursos = {
     },
     aovivo: {
         titulo: 'Loja Entregue',
-        preco: 10,
+        preco: 25,
         descricao: 'Sua loja pronta em menos de 24h com recursos VIP'
     }
 };
